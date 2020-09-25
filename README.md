@@ -1,3 +1,3 @@
-# universe_shell_code
+# universal shell code
 
 1.visual studio 인라인 어셈을 이용해 구현
