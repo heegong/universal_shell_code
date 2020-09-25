@@ -24,22 +24,22 @@ int main() {
 
 		mov eax, dword ptr[ebp + 30]
 		mov ecx, dword ptr[ebp + 10]
-		lea edx, [ecx + eax + 0x14]													// number_of_name   밑에 보면 알겠지만 그 01  11  이런식으로 있어서 lea쓰는겨
+		lea edx, [ecx + eax + 0x14]													// number_of_name   밑에 보면 알겠지만 그 01  11  이런식으로 있어서 lea쓰는거다
 		// edx에 모셔놓는다.
 
 		mov eax, [ebp-10]																//name_pointer_table_int
 		mov ecx, [ebp + 10]
 		add ecx, dword ptr[eax]
-		mov dword ptr[ebp-30], ecx						// pointer table 아 주석에 사진을 뛰울수있으면 좋을텐뎅 미래의 희찬아 그냥 기억해 ㅎㅎ
+		mov dword ptr[ebp-30], ecx						// pointer table 
 																									// pe viewer으로 보면 있음
 
 		mov eax, [ebp-30]
 		mov edx, [eax]
 		xor esi, esi
-		find_winexec :																	//겁나 힘들게 구현한 name_pointer_table에서 WinExec가 몇번인지 찾기 후후
+		find_winexec :																	//힘들게 구현한 name_pointer_table에서 WinExec가 몇번인지 찾기 후후
 			inc esi
 			mov ecx, [ebp-30]
-			mov edx, dword ptr[ecx + esi * 4]							// 정수형  배열이라고 생각을 하셈. a = [1,2,3]   이라고 있다면 하나씩 증가해서 비교한다는 거임
+			mov edx, dword ptr[ecx + esi * 4]							// 정수형  배열이라고 생각. a = [1,2,3]   이라고 있다면 하나씩 증가해서 비교한다는 거다.
 			add edx, [ebp+10]
 			//edx에 함수명들을 모셔놓기
 			mov [ebp+150],0x57				//W
@@ -121,7 +121,7 @@ int main() {
 		mov eax, [ebp-80]
 
 		mov ecx, [ebp+10]
-		add ecx, dword ptr[eax + edx * 4]							//아까 저장했던 edx*4 즉 4바이트씩 넘긴다.   정수형  배열이라고 생각하면 겁나 편함.
+		add ecx, dword ptr[eax + edx * 4]							//아까 저장했던 edx*4 즉 4바이트씩 넘긴다.   정수형  배열이라고 생각하면 편하다.
 		mov eax, ecx															//winexec의 주소다. eax = 주소
 
 		mov[ebp + 20], 0x63												//그냥 cmd라는 문자열을 ecx에 넣어주는 작업이다.
@@ -132,7 +132,7 @@ int main() {
 		push 0																	    // 밑에 2개줄까지 WinExec("cmd",0) 이다.
 		push ecx
 		call eax
-		pop esp															// 몰러 이거 안해주면 뭐시기 뭐시기 런타임 뜬다.
+		pop esp															
 	}
 	return 0;
 }
