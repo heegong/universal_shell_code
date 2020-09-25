@@ -1,3 +1,3 @@
 # universe_shell_code
 
-1.어셈블리어로 구현한 유니버셜 쉘코드 
+1.visual studio 인라인 어셈을 이용해 구현
